@@ -16,7 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <h1> title pelo layaut</h1>
+        {children}
+        <h2> footer pelo layaut</h2>
+        </body>
     </html>
   );
 }
