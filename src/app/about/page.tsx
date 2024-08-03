@@ -1,8 +1,13 @@
-
+import { Avatar, AvatarFallback, AvatarImage } from '../_components/ui/avatar'
 
 
 const About = () => {
-    return <h1 className="text-red-500 px-4 mb-5 bg-red-200"> page about</h1>
+    return (
+            <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+        )
 }
 
 export default About
