@@ -1,10 +1,17 @@
 import { Button } from "./ui/button"
-import { CalendarIcon, HomeIcon, LogOutIcon } from "lucide-react"
+import { CalendarIcon, HomeIcon, LogInIcon, LogOutIcon } from "lucide-react"
 import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet"
 import { quickSearchOptions } from "../_constants/search"
-import { Avatar, AvatarImage } from "./ui/avatar"
 import Link from "next/link"
 import Image from "next/image"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+  DialogHeader,
+} from "./ui/dialog"
 
 const SidebarButton = () => {
   return (
@@ -12,15 +19,26 @@ const SidebarButton = () => {
       <SheetHeader>
         <SheetTitle className="text-left">Menu</SheetTitle>
 
-        <div className="flex items-center border-b border-solid py-5">
-          <Avatar>
-            <AvatarImage src="https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_3x4.jpg" />
-          </Avatar>
+        <div className="flex items-center justify-between border-b border-solid py-5">
+          <h2 className="font-bold">Olá faça seu login</h2>
 
-          <div>
-            <p className="font-bold">Wellington Vinhatto</p>
-            <p className="text-xs">WEllington@devs</p>
-          </div>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="icon">
+                <LogInIcon />
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Faça login na plataforma</DialogTitle>
+                <DialogDescription>
+                  Conecte-se usando sua conta Google
+                </DialogDescription>
+              </DialogHeader>
+              <Button className="font-bold">Google</Button>
+            </DialogContent>
+          </Dialog>
         </div>
 
         <div className="g-1 flex flex-col border-b border-solid p-5">
