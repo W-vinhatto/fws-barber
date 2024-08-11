@@ -11,6 +11,7 @@ interface BarberShopPageProps {
 }
 
 const BarberShopPage = async ({ searchParams }: BarberShopPageProps) => {
+  // chmar o banco de dados
   const barbershops = await db.barbershop.findMany({
     where: {
       OR: [

@@ -33,6 +33,7 @@ const BarbershopPages = async ({ params }: BarbersophingPageProps) => {
 
   return (
     <div>
+      {/* image */}
       <div className="relative h-[250px] w-full">
         <Image
           alt={barbershop.name}
@@ -66,6 +67,7 @@ const BarbershopPages = async ({ params }: BarbersophingPageProps) => {
         </Sheet>
       </div>
 
+      {/* title */}
       <div className="border-b border-solid p-5">
         <h1 className="mb-6 text-xl font-bold">{barbershop?.name}</h1>
 
@@ -80,20 +82,27 @@ const BarbershopPages = async ({ params }: BarbersophingPageProps) => {
         </div>
       </div>
 
+      {/* descrição */}
       <div className="space-x-3 border-b border-solid p-5">
         <h2 className="ml-3 font-bold uppercase text-gray-400">Sobre Nós</h2>
         <p className="text-justify text-sm">{barbershop?.description}</p>
       </div>
 
+      {/* serviços */}
       <div className="border-b border-solid p-5">
         <h2 className="mb-3 font-bold uppercase text-gray-400">Serviços</h2>
         <div className="space-y-3">
           {barbershop.services.map((services) => (
-            <ServiceItem key={services.id} service={services} />
+            <ServiceItem
+              key={services.id}
+              barbershop={barbershop}
+              service={services}
+            />
           ))}
         </div>
       </div>
 
+      {/* contatos */}
       <div className="space-y-3 p-5">
         {barbershop.phones.map((phones) => (
           <PhoneItem key={phones} phone={phones} />

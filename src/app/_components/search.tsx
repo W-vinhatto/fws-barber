@@ -31,28 +31,26 @@ const Search = () => {
   }
 
   return (
-    <>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="flex gap-2">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Input placeholder="Faça sua busca" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex gap-2">
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormControl>
+                <Input placeholder="Faça sua busca" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-          <Button className="rounded-xl" type="submit">
-            <SearchIcon />
-          </Button>
-        </form>
-      </Form>
-    </>
+        <Button className="rounded-xl" type="submit">
+          <SearchIcon />
+        </Button>
+      </form>
+    </Form>
   )
 }
 
