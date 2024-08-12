@@ -6,21 +6,14 @@ import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet"
 import { quickSearchOptions } from "../_constants/search"
 import Link from "next/link"
 import Image from "next/image"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-  DialogHeader,
-} from "./ui/dialog"
-import { signIn, signOut, useSession } from "next-auth/react"
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
+import { signOut, useSession } from "next-auth/react"
 import { Avatar, AvatarImage } from "./ui/avatar"
+import SingInDialog from "./sing-in-dialog"
 
 const SidebarButton = () => {
   const { data } = useSession()
 
-  const handleloginwithGoogleClick = () => signIn("google")
   const handleLogoutClick = () => signOut()
 
   return (
@@ -52,19 +45,8 @@ const SidebarButton = () => {
                 </Button>
               </DialogTrigger>
 
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Faça login na plataforma</DialogTitle>
-                  <DialogDescription>
-                    Conecte-se usando sua conta Google
-                  </DialogDescription>
-                </DialogHeader>
-                <Button
-                  className="font-bold"
-                  onClick={handleloginwithGoogleClick}
-                >
-                  Google
-                </Button>
+              <DialogContent className="w-[90%]">
+                <SingInDialog />
               </DialogContent>
             </Dialog>
           </>
