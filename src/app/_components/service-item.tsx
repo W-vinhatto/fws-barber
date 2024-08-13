@@ -68,6 +68,8 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
       const hour = Number(time.split(":")[0])
       const minute = Number(time.split(":")[1])
 
+      // verifica horário do dia para não agendar antes
+
       // verifica disponibilidade de horário
       const hasBookingOnCurrentTime = bookings.some(
         (bookings) =>
@@ -141,7 +143,6 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
 
       await createBooking({
         serviceId: service.id,
-        userId: (data?.user as any).id,
         date: newDate,
       })
       toast.success("Serviço agendado")
