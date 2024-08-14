@@ -152,7 +152,7 @@ const BoockingItem = ({ booking }: BookingingItemProps) => {
               <div className="flex items-center justify-between">
                 <h2 className="text-sm text-gray-400">Data</h2>
                 <p className="text-sm">
-                  {format(booking.date, "d 'de' MMM", {
+                  {format(booking.date, "d 'de' MMMM", {
                     locale: ptBR,
                   })}
                 </p>

@@ -16,8 +16,8 @@ import {
 import { Calendar } from "./ui/calendar"
 
 import { ptBR } from "date-fns/locale"
-import { useEffect, useState } from "react"
-import { format, set } from "date-fns"
+import { useEffect, useMemo, useState } from "react"
+import { format, isPast, isToday, set } from "date-fns"
 import { createBooking } from "../_actions/create-bookins"
 import { toast } from "sonner"
 import { useSession } from "next-auth/react"
@@ -63,12 +63,22 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
   const [bookingSheetIsOpen, setBookingSheetIsOpen] = useState(false)
 
   /* -i usando mudança de atualização da agenda */
-  const getTimeList = (bookings: Booking[]) => {
+  interface GetTimeListProps {
+    bookings: Booking[]
+    selectDay: Date
+  }
+  const getTimeList = ({ bookings, selectDay }: GetTimeListProps) => {
     return TIME_LIST.filter((time) => {
       const hour = Number(time.split(":")[0])
       const minute = Number(time.split(":")[1])
 
       // verifica horário do dia para não agendar antes
+      const timeIsOnThePast = isPast(
+        set(new Date(), { hours: hour - 2, minutes: minute }),
+      )
+      if (timeIsOnThePast && isToday(selectDay)) {
+        return false
+      }
 
       // verifica disponibilidade de horário
       const hasBookingOnCurrentTime = bookings.some(
@@ -151,6 +161,17 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
       toast.error("Erro ao criar reserva")
     }
   }
+
+  // resumindo função timelist para facilitar leitura
+  // usando MEMO para evitar releitura - fazer leitura da função apenas quando
+  // dayB e selec forem auterados -seme- useef
+  const timeList = useMemo(() => {
+    if (!selectDay) return []
+    return getTimeList({
+      bookings: dayBookings,
+      selectDay,
+    })
+  }, [dayBookings, selectDay])
 
   return (
     <>
@@ -236,16 +257,22 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                   {/* logica para seleção de dia e hr */}
                   {selectDay && (
                     <div className="flex gap-3 overflow-x-auto border-b border-solid p-5 [&::-webkit-scrollbar]:hidden">
-                      {getTimeList(dayBookings).map((time) => (
-                        <Button
-                          key={time}
-                          variant={selectTime == time ? "default" : "outline"}
-                          className="rounded-full"
-                          onClick={() => handleTime(time)}
-                        >
-                          {time}
-                        </Button>
-                      ))}
+                      {timeList.length > 0 ? (
+                        timeList.map((time) => (
+                          <Button
+                            key={time}
+                            variant={selectTime == time ? "default" : "outline"}
+                            className="rounded-full"
+                            onClick={() => handleTime(time)}
+                          >
+                            {time}
+                          </Button>
+                        ))
+                      ) : (
+                        <p className="text-xs">
+                          Não há horário disponivél para esse dia
+                        </p>
+                      )}
                     </div>
                   )}
 
