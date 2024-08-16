@@ -100,9 +100,16 @@ const Home = async () => {
             </h2>
 
             <div className="flex w-[100%] gap-2 overflow-x-auto p-5 [&::-webkit-scrollbar]:hidden">
-              {bookings.map((booking) => (
-                <BoockingItem key={booking.id} booking={booking} />
-              ))}
+              {bookings.map(
+                (
+                  booking, // corrigindo erro de decimal do console
+                ) => (
+                  <BoockingItem
+                    key={booking.id}
+                    booking={JSON.parse(JSON.stringify(booking))}
+                  />
+                ),
+              )}
             </div>
           </>
         )}
