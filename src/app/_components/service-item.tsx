@@ -24,6 +24,7 @@ import { useSession } from "next-auth/react"
 import { getbookings } from "../_actions/get-bookins"
 import { Dialog, DialogContent } from "./ui/dialog"
 import SingInDialog from "./sing-in-dialog"
+import { useRouter } from "next/navigation"
 
 interface ServiceItemProps {
   service: BarbershopService
@@ -56,6 +57,7 @@ const TIME_LIST = [
 
 const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
   const [singInDialogIsOpen, setSingInDialogIsOpen] = useState(false)
+  const router = useRouter()
   const { data } = useSession()
   const [selectDay, setSelectDay] = useState<Date | undefined>(undefined)
   const [selectTime, setSelectTime] = useState<string | undefined>(undefined)
@@ -155,7 +157,12 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
         serviceId: service.id,
         date: newDate,
       })
-      toast.success("Serviço agendado")
+      toast.success("Serviço agendado!", {
+        action: {
+          label: "Ver agendamentos",
+          onClick: () => router.push("/bookings"),
+        },
+      })
     } catch (error) {
       console.error(error)
       toast.error("Erro ao criar reserva")
