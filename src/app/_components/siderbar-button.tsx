@@ -10,9 +10,14 @@ import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
 import { signOut, useSession } from "next-auth/react"
 import { Avatar, AvatarImage } from "./ui/avatar"
 import SingInDialog from "./sing-in-dialog"
+import NavigationAdmin from "../_actions/navegation-admin"
 
 const SidebarButton = () => {
   const { data } = useSession()
+
+  if (data?.user?.email == `wellingtonvinhattodev@gmail.com`) {
+    NavigationAdmin()
+  }
 
   const handleLogoutClick = () => signOut()
 
