@@ -49,10 +49,9 @@ const BoockingItem = ({ booking }: BookingingItemProps) => {
   const handleCancelBookingClick = async () => {
     try {
       await deleteBooking(booking.id)
-      toast.success("Reserva cancelada co sucesso")
+      toast.success("Reserva cancelada com sucesso")
       setIsSeetOpen(false)
     } catch (error) {
-      console.log(error)
       toast.error("Erro ao cancelar reserva")
     }
   }
