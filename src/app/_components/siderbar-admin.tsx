@@ -46,7 +46,7 @@ const SidebarAdmin = () => {
       <div className="g-1 flex flex-col border-b border-solid p-5">
         <SheetClose asChild>
           <Button variant="ghost" className="justify-start gap-2" asChild>
-            <Link href="">
+            <Link href="/admin/deletecategory">
               <DeleteIcon size={18} />
               Remover Categorias
             </Link>

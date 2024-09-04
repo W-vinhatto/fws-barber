@@ -11,18 +11,21 @@ import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
 const Admin = async () => {
-  //const categorys = await db.barbershop.findMany({})
-  //const services = await db.barbershopService.findMany({})
   const agendados = await db.booking.findMany({
     include: {
       service: true,
     },
   })
 
+  // Supondo que agendados seja uma lista de objetos com uma data
+  const sortedAgendados = agendados.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  )
+
   return (
     <>
       <Header />
-      <div>
+      <div className="mt-3">
         <Card>
           <CardContent className="flex justify-between p-5">
             <p className="mt-2 text-center font-bold"> Bem vindo a sua loja!</p>
@@ -39,7 +42,7 @@ const Admin = async () => {
       </div>
 
       <div className="flex flex-col p-6">
-        {agendados.map((agenda) => (
+        {sortedAgendados.map((agenda) => (
           <Card className="mb-6 mt-3" key={agenda.id}>
             <CardContent className="space-y-3 p-3">
               <div className="flex items-center justify-between">
@@ -75,34 +78,6 @@ const Admin = async () => {
           </Card>
         ))}
       </div>
-
-      {/*
-      <div >
-        {categorys.map((categoria) => (
-          <CardDeletCategory key={categoria.id} barbershop={categoria} />
-        ))}
-      </div>
-
-  
-      <div >
-        {services.map((serviceid) => (
-         <CardDeletService key={serviceid.id} serviceId={serviceid}/>
-        ))}
-      </div>
-    
-      <div className="m-2 h-[50px] bg-slate-500">
-        <p>remover categoria</p>
-      </div>
-
-      <div className="m-2 h-[50px] bg-slate-500">
-        <p>cadastrar produtos</p>
-      </div>
-
-      <div className="m-2 h-[50px] bg-slate-500">
-        <p>remover produtos</p>
-      </div>
-
-      */}
     </>
   )
 }
