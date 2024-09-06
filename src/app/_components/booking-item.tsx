@@ -71,7 +71,7 @@ const BoockingItem = ({ booking }: BookingingItemProps) => {
                 className="w-fit"
                 variant={isConfimed ? "default" : "secondary"}
               >
-                {isConfimed ? "Confirmaado" : "Finalizado"}
+                {isConfimed ? "Confirmado" : "Finalizado"}
               </Badge>
 
               <h3 className="font-semibold">{booking.service.name}</h3>

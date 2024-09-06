@@ -55,7 +55,7 @@ const SidebarAdmin = () => {
 
         <SheetClose asChild>
           <Button variant="ghost" className="justify-start gap-2" asChild>
-            <Link href="">
+            <Link href="/admin/deleteservices">
               <DeleteIcon size={18} />
               Remover Serviços
             </Link>
