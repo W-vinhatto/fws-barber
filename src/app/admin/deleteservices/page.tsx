@@ -33,7 +33,7 @@ const DeleteService = async () => {
       <div className="flex flex-col p-6">
         {services.map((service) => (
           <div key={service.id} className="mt-3">
-            <CardDeletService serviceId={service} />
+            <CardDeletService serviceId={JSON.parse(JSON.stringify(service))} />
           </div>
         ))}
       </div>

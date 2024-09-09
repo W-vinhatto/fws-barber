@@ -31,7 +31,11 @@ const DeleteCategorry = async () => {
 
       <div className="flex flex-col p-6">
         {categorys.map((categoria) => (
-          <CardDeletCategory key={categoria.id} barbershop={categoria} />
+          <div key={categoria.id} className="mt-6">
+            <CardDeletCategory
+              barbershop={JSON.parse(JSON.stringify(categoria))}
+            />
+          </div>
         ))}
       </div>
     </>
